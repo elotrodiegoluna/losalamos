@@ -3,6 +3,8 @@ from django.contrib import messages #envia mensajes
 from django.shortcuts import render
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
+from .forms import LoginForm # formulario personalizado (validacion de errores)
+from crispy_forms.helper import FormHelper
 
 
 def home(request):   #pagina de inicio
@@ -10,23 +12,27 @@ def home(request):   #pagina de inicio
 
 
 def acceder(request):
-    if request.method == "POST":
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            nombre_usuario = form.cleaned_data.get("username")
-            password= form.cleaned_data.get("password")
-            usuario = authenticate(username=nombre_usuario, password=password)
-            if usuario is not None:
-                login(request, usuario)
-                messages.success(request, f"Bienvenid@ de nuevo {nombre_usuario}")
-                return redirect("home")
-            else:
-                messages.error(request, "Los datos son incorrectos")
-        else:
-            messages.error(request, "Los datos son incorrectos")
+    context = {}
 
-    form = AuthenticationForm()
-    return render(request,"login.html",{"form" : form})
+    user = request.user
+    if user.is_authenticated:
+        return redirect('home')
+    if request.POST:
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(username=username, password=password)
+
+            if user:
+                login(request, user)
+                return redirect('home')
+        else:
+            context['login_form'] = form
+    else:
+        form = LoginForm()
+    context['login_form'] = form
+    return render(request,"login.html", context)
 
 def LogOut(request):
     logout(request)

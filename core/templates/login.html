@@ -13,13 +13,23 @@
                 <div class="card-body">
                     <h2>Iniciar Sesión</h2>
                     <hr>
-                    <form action="" method="post">
-                        {% csrf_token %}
+                    <form action="" method="post"> {% csrf_token %}
                         {{ form | crispy }}
 
+                        <div class="input-title">Nombre de Usuario</div>
+                        <input type="text" id="username" class="form-control" name="username" required="">
+                        <div class="input-title">Contraseña</div>
+                        <input type="password" id="password" class="form-control" name="password" required="">
 <br>                    
-                        
-                        <button class="botonn btn btn-primary" href="{%url 'home'%}">Ingresar</button>
+                        {% for error in login_form.field.errors %}
+                            <small style="color: rgb(197, 16, 16);">{{ errors }}</small>
+                        {% endfor %}
+                        {% if login_form.non_field_errors %}
+                            <small style="color: rgb(197, 16, 16);">{{ login_form.non_field_errors }}</small>
+                        {% endif %}
+
+                        <button class="botonn btn btn-primary" href="">Ingresar</button>
+                    
                     </form>
                     <a class="" href="{%url 'registro'%}">Registrate!</a>
                     <a class="" href="{%url 'home'%}">Home</a>
