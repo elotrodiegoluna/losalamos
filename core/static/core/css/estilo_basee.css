@@ -1,0 +1,16 @@
+body{
+    background-image: url(https://t2.uc.ltmcdn.com/es/posts/7/9/3/como_ser_la_pareja_de_un_doctor_35397_orig.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    
+
+}
+.logito{
+    width: 10px;
+}
+
+.card{
+    background: transparent;
+    border-color: black;
+    backdrop-filter: blur(20px);
+}

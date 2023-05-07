@@ -1,0 +1,35 @@
+    {% extends 'base.html' %}
+    {% load static %}
+    {% block base %}
+
+<body class="pag">
+    {% load crispy_forms_tags %}
+    <br><br><br><br><br><br><br><br>
+      <center><div class="container wrapper" >
+        <div class="row">
+            <div class="col-12 col-md-6 offset-md-3 logi">
+
+               <div class="card">
+                <div class="card-body">
+                    <h2>Iniciar Sesión</h2>
+                    <hr>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        {{ form | crispy }}
+
+<br>                    
+                        
+                        <button class="botonn btn btn-primary" href="{%url 'home'%}">Ingresar</button>
+                    </form>
+                    <a class="" href="{%url 'registro'%}">Registrate!</a>
+                    <a class="" href="{%url 'home'%}">Home</a>
+                </div>
+               </div> 
+
+            </div>
+        </div>
+    </div></center>
+    <br>
+</body>
+
+{% endblock %}
