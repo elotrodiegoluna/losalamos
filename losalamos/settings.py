@@ -46,7 +46,10 @@ INSTALLED_APPS = [
     'crispy_forms', #diseño de boostrap para los formularios
     'bootstrap_datepicker_plus',
     'import_export',
+    'crispy_bootstrap4',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
