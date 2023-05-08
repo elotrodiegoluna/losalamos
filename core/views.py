@@ -6,6 +6,11 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm # formulario personalizado (validacion de errores)
 from crispy_forms.helper import FormHelper
 
+# para usar el calendario
+import calendar
+from django.views import View
+from .models import Event
+
 #Importaciones para las vistas de reserva
 from core.models import Medico, Especialidad, TipoServicio,Servicio
 
@@ -48,4 +53,14 @@ def consultas(request):
     listaMedicos['medicos']= Medico.objects.all()
     listaMedicos['servicios']= Servicio.objects.all()
     listaMedicos['tipoServicios']= TipoServicio.objects.all()
+    events = Event.objects.all()
     return render(request,'consultas.html',listaMedicos)
+
+
+def obtener(request):
+    listaMedicos={}
+    listaMedicos['medicos']= Medico.objects.all()
+    listaMedicos['servicios']= Servicio.objects.all()
+    listaMedicos['tipoServicios']= TipoServicio.objects.all()
+    events = Event.objects.all()
+    return render(request, 'calendario.html', {'events': events})

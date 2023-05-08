@@ -9,7 +9,6 @@ class Paciente(models.Model):
     fecha_nacimiento = models.DateField()
     correo = models.CharField(max_length=45)
     nro_telefono = models.IntegerField()
-    pacientecol = models.CharField(max_length=45)
 
     class Meta:
         db_table = 'paciente'
@@ -17,7 +16,6 @@ class Paciente(models.Model):
 
 class Especialidad(models.Model):
     nombreEspecialidad = models.CharField(max_length=45)
-    idEspecialidad = models.IntegerField(primary_key=True)
     class Meta:
         db_table = 'especialidad'
 
@@ -96,3 +94,14 @@ class ReservaHora(models.Model):
 
     class Meta:
         db_table = 'reservaHora'
+
+    from django.db import models
+
+class Event(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
+
+    def __str__(self):
+        return self.title

@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'bootstrap_datepicker_plus',
     'import_export',
     'crispy_bootstrap4',
+
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

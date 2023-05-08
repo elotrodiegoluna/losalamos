@@ -40,4 +40,6 @@ function bloquearMedico(texto){
     cerrar.className="accordion-collapse collapse";
     desahabilitarDoctor.disabled = true;
 
+
+
 };
