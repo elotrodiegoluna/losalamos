@@ -6,6 +6,8 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm # formulario personalizado (validacion de errores)
 from crispy_forms.helper import FormHelper
 
+#Importaciones para las vistas de reserva
+from core.models import Medico, Especialidad, TipoServicio,Servicio
 
 def home(request):   #pagina de inicio
     return render (request, 'home.html')
@@ -40,3 +42,10 @@ def LogOut(request):
 
 def registro(request):
     return render(request,'registro.html')
+
+def consultas(request):
+    listaMedicos={}
+    listaMedicos['medicos']= Medico.objects.all()
+    listaMedicos['servicios']= Servicio.objects.all()
+    listaMedicos['tipoServicios']= TipoServicio.objects.all()
+    return render(request,'consultas.html',listaMedicos)
