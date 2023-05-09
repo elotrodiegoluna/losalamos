@@ -1,8 +1,8 @@
+{% extends 'base.html' %}
 
-<!DOCTYPE html>
-<html lang="en">
     {% load static %}
    
+    {% block base %}
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -156,7 +156,7 @@
               },
           });
       });
-  </script> 
+      </script> 
         </div>
     </div>
 
@@ -168,4 +168,4 @@
         <script src='{% static "core/js/consultas.js" %}'></script>
 
       </body>
-    </html>
+    {% endblock %}

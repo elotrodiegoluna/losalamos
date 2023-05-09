@@ -50,22 +50,19 @@
 </head>
 <body class="fondo">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid ">
 
-   
-      <a class="navbar-brand" href="#">
-        <img src="{% static 'core/img/LOGO-Centro clinico.png' %}" alt="" width="60" height="48">
-      </a>
-   
-   
-   <div>
+  <div class="container-fluid">
+    <img src="{% static 'core/img/LOGO-Centro clinico.png' %}" alt="" class="logito" style="width:50px;height: 50px">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav " aria-current="page">        
         <li class="nav-item">
           <a class="nav-link active"  href="#"><i class="fa-solid fa-stethoscope p-2" ></i>Medicos y especialidades</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="#"><i class="fa-solid fa-house-medical p-2"></i>Servicios</a>
+          <a class="nav-link" href="{% url 'consultas'%}">Hora Medica</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" href="#"><i class="fa-solid fa-circle-info p-2"></i>Informacion al paciente</a>
