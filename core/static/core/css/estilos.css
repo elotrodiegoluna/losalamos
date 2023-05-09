@@ -1,0 +1,14 @@
+.fondo{
+    background-image: url('../img/fondo_1.png');
+    background-size: cover;
+}
+
+
+.logito{
+    width: 10px;
+}
+
+.fondo_2{
+    background-image: url('../../core/static/core/img/fondo_2.png'); 
+    background-size: cover;
+}
