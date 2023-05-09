@@ -1,17 +1,28 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+from django.utils.translation import gettext_lazy as _
+from .manager import CustomUserManager
 
 # Create your models here.
 
-class Paciente(User):
+class Paciente(AbstractUser):
+    # CUSTOM
     nombre = models.CharField(max_length=45, default='nombre')
     rut = models.CharField(max_length=45, default='123')
-    fecha_nacimiento = models.DateField(default='01/01/1992')
-    correo = models.CharField(max_length=45, default='asd@asd.cl')
+    fecha_nacimiento = models.DateField(null=True)
     nro_telefono = models.IntegerField(default=123132)
 
-    class Meta:
-        db_table = 'paciente'
+    # DEFAULT
+    username = None
+    email = models.EmailField(_("email address"), unique=True)
+
+    objects = CustomUserManager()
+
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ['nombre', 'rut']
+
+    def __str__(self):
+        return self.email
 
 
 class Especialidad(models.Model):
