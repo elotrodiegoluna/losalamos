@@ -1,14 +1,14 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
-class Paciente(models.Model):
-    nombre = models.CharField(max_length=45)
-    constraseña = models.CharField(max_length=45)
-    rut = models.CharField(max_length=45)
-    fecha_nacimiento = models.DateField()
-    correo = models.CharField(max_length=45)
-    nro_telefono = models.IntegerField()
+class Paciente(User):
+    nombre = models.CharField(max_length=45, default='nombre')
+    rut = models.CharField(max_length=45, default='123')
+    fecha_nacimiento = models.DateField(default='01/01/1992')
+    correo = models.CharField(max_length=45, default='asd@asd.cl')
+    nro_telefono = models.IntegerField(default=123132)
 
     class Meta:
         db_table = 'paciente'
