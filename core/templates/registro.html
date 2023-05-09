@@ -1,13 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-    {% load static %}
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h2>HOLA</h2>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block base %}
+
+<body class="pag">
+    {% load crispy_forms_tags %}
+    <br><br><br><br>
+      <center><div class="container wrapper" >
+        <div class="row">
+            <div class="col-12 col-md-6 offset-md-3 logi">
+
+               <div class="card">
+                <div class="card-body">
+                    <h2>Registro</h2>
+                    <hr>
+                    <form action="" method="post"> {% csrf_token %}
+                        {{ form | crispy }}
+
+                        <div class="input-title">Nombre de Usuario</div>
+                        <input type="text" id="username" class="form-control" name="username" required="">
+                        <div class="input-title">Contraseña</div>
+                        <input type="password" id="password" class="form-control" name="password" required="">
+                        <div class="input-title">Nombre y apellido</div>
+                        <input type="text" id="username" class="form-control" name="username" required="">
+                        <div class="input-title">RUT</div>
+                        <input type="text" id="username" class="form-control" name="username" required="">
+                        
+                        <hr class="mb-2">
+
+                        <div class="checkbox mb-3" >
+                          <label for="checkbox">
+                            <input type="checkbox"  data-parsley-mincheck="1" required data-parsley-required-message="Debes aceptar los términos de acuerdo.">
+                            Acepto los términos y condiciones.
+                          </label>
+                        </div>
+
+                        {% for error in login_form.field.errors %}
+                            <small style="color: rgb(197, 16, 16);">{{ errors }}</small>
+                        {% endfor %}
+                        {% if login_form.non_field_errors %}
+                            <small style="color: rgb(197, 16, 16);">{{ login_form.non_field_errors }}</small>
+                        {% endif %}
+
+                        <button class="botonn btn btn-dark" href="">Registrarse</button>
+                    
+                    </form>
+                    <a class="" href="{%url 'acceder'%}">¿No estás registrado?</a>
+                </div>
+               </div> 
+
+            </div>
+        </div>
+    </div></center>
+    <br>
 </body>
-</html>
+
+{% endblock %}
