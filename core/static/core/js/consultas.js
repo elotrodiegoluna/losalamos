@@ -39,7 +39,5 @@ function bloquearMedico(texto){
     var cerrar = document.getElementById("flush-collapseThree");
     cerrar.className="accordion-collapse collapse";
     desahabilitarDoctor.disabled = true;
-
-
-
 };
+
