@@ -3,7 +3,7 @@ from django.contrib import messages #envia mensajes
 from django.shortcuts import render
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
-from .forms import LoginForm # formulario personalizado (validacion de errores)
+from .forms import LoginForm, RegistrationForm # formulario personalizado (validacion de errores)
 from crispy_forms.helper import FormHelper
 
 # para usar el calendario
@@ -11,12 +11,14 @@ import calendar
 from django.views import View
 from .models import Event
 
+import logging
+logger = logging.getLogger('django')
+
 #Importaciones para las vistas de reserva
 from core.models import Medico, Especialidad, TipoServicio,Servicio
 
 def home(request):   #pagina de inicio
     return render (request, 'home.html')
-
 
 def acceder(request):
     context = {}
@@ -27,9 +29,9 @@ def acceder(request):
     if request.POST:
         form = LoginForm(request.POST)
         if form.is_valid():
-            username = request.POST['username']
+            email = request.POST['email']
             password = request.POST['password']
-            user = authenticate(username=username, password=password)
+            user = authenticate(email=email, password=password)
 
             if user:
                 login(request, user)
@@ -39,14 +41,31 @@ def acceder(request):
     else:
         form = LoginForm()
     context['login_form'] = form
-    return render(request,"login.html", context)
+    return render(request,"login.html", context) 
 
 def LogOut(request):
     logout(request)
     return redirect('/')
 
 def registro(request):
-    return render(request,'registro.html')
+    context = {}
+    if request.POST:
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            email = form.cleaned_data.get('email')
+            raw_password = form.cleaned_data.get('password')
+            user = authenticate(username=email, password=raw_password)
+            #login(request, user) da error
+            return redirect('acceder')
+        else:
+            context['registration_form'] = form
+    else:
+        form = RegistrationForm()
+        context['registration_form'] = form
+    return render(request, 'registro.html', context)
+
+
 
 def consultas(request):
     listaMedicos={}
