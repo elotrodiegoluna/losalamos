@@ -17,15 +17,16 @@
                     <hr>
                     <form action="" method="post"> {% csrf_token %}
                         {{ form | crispy }}
-
-                        <div class="input-title">Nombre de Usuario</div>
-                        <input type="text" id="username" class="form-control" name="username" required="">
+                        <div class="input-title">Email</div>
+                        <input type="email" id="email" class="form-control" name="email" required="">
                         <div class="input-title">Contraseña</div>
-                        <input type="password" id="password" class="form-control" name="password" required="">
+                        <input type="password" id="password1" class="form-control" name="password1" required="">
+                        <div class="input-title">Confirmar contraseña</div>
+                        <input type="password" id="password2" class="form-control" name="password2" required="">
                         <div class="input-title">Nombre y apellido</div>
-                        <input type="text" id="username" class="form-control" name="username" required="">
+                        <input type="text" id="nombre" class="form-control" name="nombre" required="">
                         <div class="input-title">RUT</div>
-                        <input type="text" id="username" class="form-control" name="username" required="">
+                        <input type="text" id="rut" class="form-control" name="rut" required="">
                         
                         <hr class="mb-2">
 
@@ -36,17 +37,16 @@
                           </label>
                         </div>
 
-                        {% for error in login_form.field.errors %}
-                            <small style="color: rgb(197, 16, 16);">{{ errors }}</small>
-                        {% endfor %}
-                        {% if login_form.non_field_errors %}
-                            <small style="color: rgb(197, 16, 16);">{{ login_form.non_field_errors }}</small>
+                        {% if registration_form.errors %}
+                            <div class="alert alert-danger">
+                                {{ registration_form.errors }}
+                            </div>
                         {% endif %}
 
                         <button class="botonn btn btn-dark" href="">Registrarse</button>
                     
                     </form>
-                    <a class="" href="{%url 'acceder'%}">¿No estás registrado?</a>
+                    <a class="" href="{%url 'acceder'%}">¿Ya estás registrado?, Inicia sesión</a>
                 </div>
                </div> 
 
