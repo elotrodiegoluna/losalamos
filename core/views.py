@@ -20,7 +20,6 @@ from core.models import Medico, Especialidad, TipoServicio,Servicio
 def home(request):   #pagina de inicio
     return render (request, 'home.html')
 
-
 def acceder(request):
     context = {}
 
@@ -42,7 +41,7 @@ def acceder(request):
     else:
         form = LoginForm()
     context['login_form'] = form
-    return render(request,"login.html", context)
+    return render(request,"login.html", context) 
 
 def LogOut(request):
     logout(request)
@@ -52,7 +51,6 @@ def registro(request):
     context = {}
     if request.POST:
         form = RegistrationForm(request.POST)
-        print(form)
         if form.is_valid():
             form.save()
             email = form.cleaned_data.get('email')

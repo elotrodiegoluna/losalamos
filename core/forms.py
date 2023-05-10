@@ -8,6 +8,7 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import Paciente
+from django.shortcuts import redirect
 
 
 class RegistrationForm(UserCreationForm):
@@ -18,6 +19,8 @@ class RegistrationForm(UserCreationForm):
     class Meta:
         model = Paciente
         fields = ("email", "password1", "password2", "nombre", "rut")
+
+
     
 
 
