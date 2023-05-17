@@ -3,169 +3,214 @@
     {% load static %}
    
     {% block base %}
+    
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <link rel="stylesheet" href="{% static 'core/css/consultas.css'%}">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
-
-      </head>
-    <body>
-    <div id="centro"  style="padding: 100px; border: 5px;" class="border p-5">
-
-      <div class="row">
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <link rel="stylesheet" href="{% static 'core/css/consultas.css'%}">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
       
-      <div class="col-md-6">
-        <div> <h1 class="text-center"> Que necesita?</h1></div> <br>
+      
+  
 
-          <div class="accordion accordion-flush" id="accordionFlushExample">
-            
-            <div class="row ">
 
-            <div class="col-md-4 ">
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="flush-headingOne">
-                <button class="accordion-button collapsed" id="area" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                  Seleccione el Area de atención
-                </button>
-              </h2>
-              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                <div class="accordion-body">
 
-                  <ul class="list-group list-group-flush">
-                    {% for tipoServicio in tipoServicios %}
-                    <button type="button"  class="btn btn-light prueba " aria-controls="flush-collapseTwo" onclick="bloquearArea('{{tipoServicio.nombreServicio}}')" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">{{tipoServicio.nombreServicio}}</button>
-                    {% endfor %}
-                  </ul>
-            
-                </div>
+      <!-- jQuery -->
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- Bootstrap JS -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Popper JS (opcional, necesario para algunas funcionalidades de Bootstrap) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+      <!-- DateTimePicker CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
+
+<!-- Moment.js (necesario para DateTimePicker) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+<!-- DateTimePicker JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+    </head>
+  <body>
+  <div id="centro"  style="padding: 100px; border: 5px;" class="border p-5">
+
+    <div class="row container-xl" style="height:450px;">
+    
+    <div class="col-md-6 border-top border-left border-right " style="background: #fffff1;cursor:pointer">
+      <div> <h1 class="text-center " > ¿Que necesita?</h1></div> <br>
+
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+          
+          <div class="row ">
+
+          <div class="col-md-4 ">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingOne">
+              <button class="accordion-button collapsed" id="area" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                Seleccione el Area de atención
+              </button>
+            </h2>
+            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+
+                <ul class="list-group list-group-flush">
+                  {% for tipoServicio in tipoServicios %}
+                  <button type="button"  class="btn btn-light prueba " aria-controls="flush-collapseTwo" onclick="bloquearArea('{{tipoServicio.nombreServicio}}')" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">{{tipoServicio.nombreServicio}}</button>
+                  {% endfor %}
+                </ul>
+          
               </div>
             </div>
-                <br>
-               <div class="card">
-                <div class="card-header">Area</div>
-                   <ul class="list-group list-group-flush">
-                       <li class="list-group-item" id="selecionArea">
-                       </li>
-                       </ul>
-               </div>
           </div>
-
-            <div class="col-md-4 ">
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="flush-headingTwo">
-                <button class="accordion-button  collapsed" id="servicio" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo" disabled>
-                  Selecciones el servicio
-                </button>
-              </h2>
-              <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                <div class="accordion-body">
-                
-                  <ul class="list-group list-group-flush">
-                    {% for servicio in servicios %} 
-                    <button type="button" class="btn btn-light " onclick="bloquearServicio('{{servicio.nombreServicio}}')" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">{{servicio.nombreServicio}}</button>
-                    {% endfor %}
-			            </ul>
-
-                 
-                </div>
-              </div>
-            </div>
-                <br>
-                 <div class="card">
-                <div class="card-header">Servicio</div>
-                   <ul class="list-group list-group-flush">
-                       <li class="list-group-item" id="selecionServicio">
-                       </li>
-                       </ul>
-               </div>
-          </div>
-
-
-            <div class="col-md-4">
-
-            <div class="accordion-item ">
-              <h2 class="accordion-header" id="flush-headingThree">
-                <button class="accordion-button collapsed" id="doctor" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree" disabled>
-                  Seleccione al Doctor
-                </button>
-              </h2>
-              <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-                <div class="accordion-body">
-                    
-                  <ul class="list-group list-group-flush">
-                    {% for medico in medicos %}
-                    <button type="button" class="btn btn-light" onclick="bloquearMedico('{{medico.nombre}}')" >  {{medico.nombre}}</button>
-                    {% endfor %}
-                  </ul>  
-
-                  </div>
-                
-              </div>
-            </div>
-                <br>
-                   <div class="card ">
-                <div class="card-header">Medico</div>
-                   <ul class="list-group list-group-flush">
-                       <li class="list-group-item" id="selecionDoctor">
-                       </li>
-                       </ul>
-               </div>
-
-                 </div>
-          </div>
+              <br>
+             <div class="card">
+              <div class="card-header">Area</div>
+                 <ul class="list-group list-group-flush">
+                     <li class="list-group-item" id="selecionArea">
+                     </li>
+                     </ul>
+             </div>
         </div>
+
+          <div class="col-md-4 ">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingTwo">
+              <button class="accordion-button  collapsed" id="servicio" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo" disabled>
+                Selecciones el servicio
+              </button>
+            </h2>
+            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+              
+                <ul class="list-group list-group-flush">
+                  {% for servicio in servicios %} 
+                  <button type="button" class="btn btn-light " onclick="bloquearServicio('{{servicio.nombreServicio}}')" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">{{servicio.nombreServicio}}</button>
+                  {% endfor %}
+                </ul>
+
+               
+              </div>
+            </div>
           </div>
+              <br>
+               <div class="card">
+              <div class="card-header">Servicio</div>
+                 <ul class="list-group list-group-flush">
+                     <li class="list-group-item" id="selecionServicio">
+                     </li>
+                     </ul>
+             </div>
+        </div>
+
+
+          <div class="col-md-4">
+
+          <div class="accordion-item ">
+            <h2 class="accordion-header" id="flush-headingThree">
+              <button class="accordion-button collapsed" id="doctor" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree" disabled>
+                Seleccione al Doctor
+              </button>
+            </h2>
+            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+                  
+                <ul class="list-group list-group-flush">
+                  {% for medico in medicos %}
+                  <button type="button" class="btn btn-light" onclick="bloquearMedico('{{medico.nombre}}')" >  {{medico.nombre}}</button>
+                  {% endfor %}
+                </ul>  
+
+                </div>
+              
+            </div>
+          </div>
+              <br>
+                 <div class="card ">
+              <div class="card-header">Medico</div>
+                 <ul class="list-group list-group-flush">
+                     <li class="list-group-item" id="selecionDoctor">
+                     </li>
+                     </ul>
+             </div>
+
+               </div>
+        </div>
+      </div>
+        </div>
 
 <div class="col-md-1"></div>
 
 
-    <div class="col-md-5" >
-        <h1 class="text-center">Hora medica</h1>
-       
-          <div class="container">
-            <div id="calendar"></div>
-        </div>
-        <script>
-          $(document).ready(function() {
-              var events = [
-                  {% for event in events %}
-                      {
-                          title: "{{ event.title }}",
-                          start: "{{ event.start_time }}",
-                          start: "{{ event.start_time }}",
-                      end: "{{ event.end_time }}"
-                  },
-              {% endfor %}
-          ];
-  
-          $('#calendar').fullCalendar({
-              events: events,
-              header: {
-                  left: 'prev,next today',
-                  center: 'title',
-                  right: 'month,agendaWeek,agendaDay'
-              },
-          });
-      });
-      </script> 
+
+  <div class="col-md-5" style="background: white;cursor:pointer" >
+      <h1 class="text-center">Hora medica</h1>
+      <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="datetimepicker">Fecha:</label>
+                    <input type="text" id="datetimepicker" class="form-control" />
+                    
+                </div>
+                  <div class="text-center">
+                    <button type="button" class="btn btn-primary text-center" id="activarBoton" onclick="activarBoton()" >Revisar disponibilidad</button>
+                  </div>
+                
+            </div>
         </div>
     </div>
+      
+      <script>
+        $(document).ready(function() {
+            $('#datetimepicker').datetimepicker({
+                format: 'DD/MM/YYYY', // Formato de la fecha sin la hora
+                useCurrent: false, // Evita que la fecha actual se seleccione automáticamente
+                showTodayButton: true, // Muestra el botón "Hoy"
+                showClear: true, // Muestra el botón "Limpiar"
+                showClose: true, // Muestra el botón "Cerrar"
+                keepOpen: false, // Cierra el calendario después de seleccionar una fecha
+                ignoreReadonly: true, // Permite que el calendario se abra incluso si el campo de entrada es de solo lectura
+            });
+        });
+        </script>
+        
+      
+    <div>
 
 
       </div>
+      <div>
+        <h1>Selecciona un rango de hora:</h1>
+        <br>
+        <label>Hora:</label>
+        
+  <select id="rangosDeHora" class="btn btn-group border" >   
+      {% for hora in horasLibres %}
+          <option value="{{ hora }}">{{ hora }}</option>      
+          {% endfor %}
+  </select>
+      </div>
+      <br>
+      <div class="text-center">  <button href="{% url 'home' %}" type="button" class="btn btn-primary ">Reservar</button></div>
+      </div>
+      
+  </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>    
-        <script src='{% static "core/js/consultas.js" %}'></script>
+ 
+    </div>
 
-      </body>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>    
+      <script src='{% static "core/js/consultas.js" %}'></script>
+
+    </body>
     {% endblock %}
