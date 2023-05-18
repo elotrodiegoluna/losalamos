@@ -59,12 +59,23 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav " aria-current="page">        
         <li class="nav-item">
-          <a class="nav-link active"  href="#"><i class="fa-solid fa-stethoscope p-2" ></i>Medicos y especialidades</a>
+          <a class="nav-link active"  href="{% url 'home' %}"><i class="fa-solid fa-house p-2" ></i>Inicio</a>
+        </li>
+        <li class="nav-item">
+
+          <a class="nav-link active" href="#"><i class="fa-solid fa-circle-info p-2"></i>Informacion al paciente</a>
+          <a class="nav-link"  href="#"><i class="fa-solid fa-stethoscope p-2" ></i>Medicos y especialidades</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" href="{% url 'consultas'%}"><i class="fa-regular fa-circle-up p-2"></i>Hora Medica</a>
+        
         </li>
         <li class="nav-item">
+          <a class="nav-link active" href="#"><i class="fa-regular fa-handshake p-2"></i>Convenios y seguros</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="{% url 'consultas'%}"><i class="fa-solid fa-calendar-check p-2"></i>Reserva tu hora</a>
+
           <a class="nav-link active" href="#"><i class="fa-solid fa-circle-info p-2"></i>Informacion al paciente</a>
         </li>
         <li class="nav-item">
@@ -73,8 +84,17 @@
         <li class="nav-item">
           <a class="nav-link active" href="#"><i class="fa-solid fa-calendar-check p-2"></i>Reserva tu hora</a>
         </li>
+
+        <li class="nav-item ">
+          <a class="nav-link active" href="{%url 'acceder'%}"><i class="fa-solid fa-user p-2"></i>Iniciar sesión</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#"><i class="fa-solid fa-address-card p-2"></i>Registrate</a>
+        </li>
+
         
         {% if user.is_authenticated %}
+
         <li class="nav-item dropdown">
           <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fa-solid fa-image-portrait p-2"></i>Mi perfil

@@ -48,6 +48,7 @@ class Venta(models.Model):
     precio = models.CharField(max_length=45)
     fechaVenta = models.DateField()
     idVenta = models.IntegerField(primary_key=True)
+    estado = models.BooleanField(null=True)
 
     class Meta:
         db_table = 'venta'
@@ -81,6 +82,7 @@ class Servicio(models.Model):
 
 class ReservaHora(models.Model):
     fecha = models.CharField(max_length=45)
+    hora = models.CharField(max_length=50,null=True)
     medico_idMedico = models.ForeignKey(
         Medico,
         on_delete=models.CASCADE,
@@ -109,10 +111,10 @@ class ReservaHora(models.Model):
     from django.db import models
 
 class Event(models.Model):
-    title = models.CharField(max_length=200)
-    description = models.TextField()
-    start_time = models.DateTimeField()
-    end_time = models.DateTimeField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    date = models.DateField(null=True)
+    time = models.TimeField(null=True)
+    description = models.CharField(max_length=100)
 
     def __str__(self):
         return self.title

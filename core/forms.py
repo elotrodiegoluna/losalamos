@@ -4,8 +4,11 @@ from django.contrib.auth import authenticate
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
 from django.core.exceptions import ValidationError
-
+from core.models import Event
 from django.contrib.auth.models import User
+
+from bootstrap_datepicker_plus.widgets import DatePickerInput, TimePickerInput
+
 from django.contrib.auth.forms import UserCreationForm
 from .models import Paciente
 from django.shortcuts import redirect
@@ -24,6 +27,7 @@ class RegistrationForm(UserCreationForm):
     
 
 
+
 class LoginForm(forms.ModelForm):
     password = forms.CharField(label='password', widget=forms.PasswordInput)
 
@@ -35,5 +39,10 @@ class LoginForm(forms.ModelForm):
         if self.is_valid():
             email = self.cleaned_data['email']
             password = self.cleaned_data['password']
-            if not authenticate(email=email, password=password):
+            if not authenticate(username=username, password=password):
                 raise forms.ValidationError("Los datos no coinciden con ninguna cuenta.")
+
+
+
+
+
