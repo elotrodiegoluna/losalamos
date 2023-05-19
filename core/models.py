@@ -82,8 +82,13 @@ class Servicio(models.Model):
 
 class ReservaHora(models.Model):
     fecha = models.CharField(max_length=45)
+<<<<<<< HEAD
     hora = models.CharField(max_length=50,null=True)
+=======
+    hora = models.CharField(max_length=50)
+>>>>>>> segundaMedica
     medico_idMedico = models.ForeignKey(
+    
         Medico,
         on_delete=models.CASCADE,
         db_column='medico_idMedico',

@@ -22,8 +22,13 @@ logger = logging.getLogger('django')
 
 #Importaciones para las vistas de reserva
 
+<<<<<<< HEAD
 from core.models import Medico, Especialidad, TipoServicio,Servicio,Event,User,ReservaHora
 from core.forms import EventForm
+=======
+from core.models import Medico, Especialidad, TipoServicio,Servicio,Event,ReservaHora
+
+>>>>>>> segundaMedica
 
 
 def home(request):   #pagina de inicio
@@ -111,6 +116,7 @@ def consultas(request):
     listaMedicos['horamedica']= ReservaHora.objects.all()
     listaMedicos['horasLibres']= tomarHoras()
     return render(request,'consultas.html',listaMedicos)
+<<<<<<< HEAD
 
 
 def create_event(request, user_id):
@@ -129,3 +135,5 @@ def create_event(request, user_id):
 
 
 
+=======
+>>>>>>> segundaMedica

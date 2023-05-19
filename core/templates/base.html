@@ -93,8 +93,12 @@
         </li>
 
         
+<<<<<<< HEAD
         {% if user.is_authenticated %}
 
+=======
+        
+>>>>>>> segundaMedica
         <li class="nav-item dropdown">
           <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fa-solid fa-image-portrait p-2"></i>Mi perfil
@@ -104,7 +108,7 @@
             <li><a class="dropdown-item" href="{%url 'logout'%}">Cerrar sesion</a></li>
           </ul>
         </li>
-        {% else %}
+     
         <li class="nav-item ">
           <a class="nav-link active" href="{% url 'acceder' %}"><i class="fa-solid fa-user p-2"></i>Iniciar sesión</a>
         </li>
@@ -112,7 +116,7 @@
         <li class="nav-item">
           <a class="nav-link active" href="{% url 'registro' %}"><i class="fa-solid fa-address-card p-2"></i>Registrate</a>
         </li>
-        {% endif %}
+       
       </ul>
     </div>
   </div>
