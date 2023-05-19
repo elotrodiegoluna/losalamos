@@ -22,13 +22,7 @@ logger = logging.getLogger('django')
 
 #Importaciones para las vistas de reserva
 
-<<<<<<< HEAD
-from core.models import Medico, Especialidad, TipoServicio,Servicio,Event,User,ReservaHora
-from core.forms import EventForm
-=======
 from core.models import Medico, Especialidad, TipoServicio,Servicio,Event,ReservaHora
-
->>>>>>> segundaMedica
 
 
 def home(request):   #pagina de inicio
@@ -69,7 +63,7 @@ def registro(request):
             form.save()
             email = form.cleaned_data.get('email')
             raw_password = form.cleaned_data.get('password')
-            user = authenticate(username=email, password=raw_password)
+            user = authenticate(email=email, password=raw_password)
             #login(request, user) da error
             return redirect('acceder')
         else:
@@ -116,24 +110,3 @@ def consultas(request):
     listaMedicos['horamedica']= ReservaHora.objects.all()
     listaMedicos['horasLibres']= tomarHoras()
     return render(request,'consultas.html',listaMedicos)
-<<<<<<< HEAD
-
-
-def create_event(request, user_id):
-    user = User.objects.get(pk=user_id)
-    if request.method == 'POST':
-        form = EventForm(request.POST)
-        if form.is_valid():
-            event = form.save(commit=False)
-            event.user = user
-            event.save()
-            return redirect('myapp:events_list', user_id=user.id)
-    else:
-        form = EventForm()
-    return render(request, 'myapp/create_event.html', {'form': form, 'user': user})
-
-
-
-
-=======
->>>>>>> segundaMedica

@@ -46,7 +46,7 @@ LOGGING = {
     }
 }
 
-AUTH_USER_MODEL = "core.Paciente"
+AUTH_USER_MODEL = "core.User"
 
 # Application definition
 

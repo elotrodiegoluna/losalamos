@@ -5,7 +5,7 @@ from .manager import CustomUserManager
 
 # Create your models here.
 
-class Paciente(AbstractUser):
+class User(AbstractUser):
     # CUSTOM
     nombre = models.CharField(max_length=45, default='nombre')
     rut = models.CharField(max_length=45, default='123')
@@ -81,12 +81,8 @@ class Servicio(models.Model):
 
 
 class ReservaHora(models.Model):
-    fecha = models.CharField(max_length=45)
-<<<<<<< HEAD
+    fecha = models.CharField(max_length=45) 
     hora = models.CharField(max_length=50,null=True)
-=======
-    hora = models.CharField(max_length=50)
->>>>>>> segundaMedica
     medico_idMedico = models.ForeignKey(
     
         Medico,
@@ -104,7 +100,7 @@ class ReservaHora(models.Model):
         db_column='servicio_idservicio',
     )
     paciente_idUsuarios = models.ForeignKey(
-        Paciente,
+        User,
         on_delete=models.CASCADE,
         db_column='paciente_idUsuarios',
     )
