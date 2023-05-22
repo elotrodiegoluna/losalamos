@@ -12,3 +12,7 @@
     background-image: url('../../core/static/core/img/fondo_2.png'); 
     background-size: cover;
 }
+
+#email-vimg {
+    max-width: 100%;
+}

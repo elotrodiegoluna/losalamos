@@ -15,9 +15,14 @@ from django import forms
 #from bootstrap_datepicker_plus import DatePickerInput, TimePickerInput
 
 from .models import Event
+from .models import User
 
 import logging
 logger = logging.getLogger('django')
+
+#libreria send mail
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 #Importaciones para las vistas de reserva
@@ -26,7 +31,12 @@ from core.models import Medico, Especialidad, TipoServicio,Servicio,Event,Reserv
 
 
 def home(request):   #pagina de inicio
-    return render (request, 'home.html')
+    context = {}
+
+    if 'login_success' in request.session:
+        context['show_modal'] = True
+        del request.session['login_success'] # Eliminar variable
+    return render (request, 'home.html', context)
 
 def acceder(request):
     context = {}
@@ -42,6 +52,7 @@ def acceder(request):
             user = authenticate(email=email, password=password)
 
             if user:
+                request.session['login_success'] = True  # Variable en la sesión del usuario
                 login(request, user)
                 return redirect('home')
         else:
@@ -110,3 +121,69 @@ def consultas(request):
     listaMedicos['horamedica']= ReservaHora.objects.all()
     listaMedicos['horasLibres']= tomarHoras()
     return render(request,'consultas.html',listaMedicos)
+
+
+# RECUPERAR CONTRASEÑA #
+
+import uuid
+def resetpassword(request):
+    context = {}
+    if request.POST:
+        email = request.POST['email']
+        user_exists = User.objects.filter(email=email).exists()
+        if user_exists:
+            user_obj = User.objects.get(email=email)
+            token = str(uuid.uuid4())
+            user_obj.token_recuperarpass = token
+            user_obj.save()
+            send_forget_password_mail(email, token)
+            # correo enviado
+            return render(request, 'resetpassword_request.html')
+        context = {
+            'user_exists': email
+        }
+    return render(request, 'resetpassword.html', context)
+
+def resetpassword_request(request):
+    print(request.session["recover_email"])
+    return render(request, 'resetpassword_request.html')
+
+def resetpassword_reset(request, token):
+    print(token)
+    context = {}
+
+    try:
+        user_obj = User.objects.filter(token_recuperarpass = token).first()
+        print(user_obj)
+        context = {'user_id': user_obj.id}
+        print(user_obj.id)
+        if request.method == 'POST':
+            new_password = request.POST.get('new_password')
+            confirm_password = request.POST.get('confirm_password')
+            user_id = request.POST.get('user_id')
+
+            if user_id is None:
+                messages.success(request, 'ningun id encontrado')
+                return redirect(f'/change-password/{token}/')
+            if new_password != confirm_password:
+                messages.success(request, 'las contraseñas no coinciden')
+                return redirect(f'/change-password/{token}/')
+
+            #user_obj = User.objects.get(id = user_id)
+            print(user_obj)
+            context = {'user_id': user_obj.id}
+            user_obj.set_password(new_password)
+            user_obj.save()
+            return redirect('acceder')
+        
+    except Exception as e:
+        print(e)
+    return render(request, 'resetpassword_reset.html')
+
+def send_forget_password_mail(email, token):
+    subject = 'Enlace de recuperación de contraseña'
+    message = f'Hola, haz click en el enlace para reestablecer tu contraseña. http://localhost:8000/change-password/{token}/'
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = [email]
+    send_mail(subject, message, email_from, recipient_list)
+    return True

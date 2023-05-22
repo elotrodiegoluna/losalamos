@@ -22,8 +22,6 @@ class RegistrationForm(UserCreationForm):
         model = User
         fields = ("email", "password1", "password2", "nombre", "rut")
 
-
-
 class LoginForm(forms.ModelForm):
     password = forms.CharField(label='password', widget=forms.PasswordInput)
 

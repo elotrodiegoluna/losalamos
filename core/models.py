@@ -11,6 +11,7 @@ class User(AbstractUser):
     rut = models.CharField(max_length=45, default='123')
     fecha_nacimiento = models.DateField(null=True)
     nro_telefono = models.IntegerField(default=123132)
+    token_recuperarpass = models.CharField(max_length=100, null=True)
 
     # DEFAULT
     username = None

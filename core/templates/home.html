@@ -7,7 +7,21 @@
     <hr>
     <h3><i class="fa-brands fa-pagelines p-3"></i>Clinica los alamos, Bienestar y atencion para tí </h3>
 </div>
-
+{% if show_modal %}
+  <div class="modal fade show" id="loginSuccessModal" tabindex="-1" aria-labelledby="loginSuccessModalLabel" aria-hidden="true" style="display: block;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="loginSuccessModalLabel">Inicio de sesión exitoso</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="hideModal()"></button>
+        </div>
+        <div class="modal-body">
+          <p>Bienvenido, has iniciado sesión correctamente.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
 <br>
 
 <div class="row m-3 " >
@@ -65,9 +79,11 @@
 </div>
 
 <br>
-
-
-
-
+<script>
+  function hideModal() {
+    var modal = document.getElementById('loginSuccessModal');
+    modal.style.display = 'none';
+  }
+</script>
 {% endblock %}
 
