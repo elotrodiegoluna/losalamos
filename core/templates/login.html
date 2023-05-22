@@ -20,7 +20,7 @@
                         <input type="email" id="email" class="form-control" name="email" required="">
                         <div class="input-title">Contraseña</div>
                         <input type="password" id="password" class="form-control" name="password" required="">
-<br>                    
+                        <br>                    
                         {% for error in login_form.field.errors %}
                             <small style="color: rgb(197, 16, 16);">{{ errors }}</small>
                         {% endfor %}
@@ -38,6 +38,8 @@
                         <button class="botonn btn btn-primary" href="">Ingresar</button>
                     
                     </form>
+                    <a class="" href="{%url 'resetpassword'%}">Olvidé mi contraseña</a>
+                    <br>
                     <a class="" href="{%url 'registro'%}">¿No estás registrado?</a>
                 </div>
                </div> 
