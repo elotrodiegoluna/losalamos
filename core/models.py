@@ -2,16 +2,26 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
 from .manager import CustomUserManager
-
+from django.db import models
 # Create your models here.
 
-class Paciente(AbstractUser):
+
+
+
+class TipoUsuario(models.Model):
+    idTipoUsuario = models.IntegerField(primary_key="true")
+    tipoUsuario = models.CharField(max_length=20)
+
+class Usuario(AbstractUser):
     # CUSTOM
     nombre = models.CharField(max_length=45, default='nombre')
     rut = models.CharField(max_length=45, default='123')
     fecha_nacimiento = models.DateField(null=True)
     nro_telefono = models.IntegerField(default=123132)
-
+    tipoUsuario_idTipoUsuario = models.ForeignKey(
+        TipoUsuario,
+        on_delete=models.CASCADE,
+        db_column='especialidad_idEspecialidad',)
     # DEFAULT
     username = None
     email = models.EmailField(_("email address"), unique=True)
@@ -21,8 +31,13 @@ class Paciente(AbstractUser):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ['nombre', 'rut']
 
+    
     def __str__(self):
         return self.email
+
+
+    class Meta:
+        db_table = 'tipoUsuario'
 
 
 class Especialidad(models.Model):
@@ -79,6 +94,8 @@ class Servicio(models.Model):
         db_table = 'servicio'
 
 
+
+
 class ReservaHora(models.Model):
     fecha = models.CharField(max_length=45)
     hora = models.CharField(max_length=50)
@@ -98,8 +115,8 @@ class ReservaHora(models.Model):
         on_delete=models.CASCADE,
         db_column='servicio_idservicio',
     )
-    paciente_idUsuarios = models.ForeignKey(
-        Paciente,
+    usuario_idusuario = models.ForeignKey(
+        Usuario,
         on_delete=models.CASCADE,
         db_column='paciente_idUsuarios',
     )
@@ -108,7 +125,7 @@ class ReservaHora(models.Model):
     class Meta:
         db_table = 'reservaHora'
 
-    from django.db import models
+    
 
 class Event(models.Model):
     title = models.CharField(max_length=200)

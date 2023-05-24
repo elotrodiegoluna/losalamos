@@ -17,7 +17,7 @@ class RegistrationForm(UserCreationForm):
     rut = forms.CharField(label='rut', max_length=64)
 
     class Meta:
-        model = Paciente
+        model = Usuario
         fields = ("email", "password1", "password2", "nombre", "rut")
 
 
