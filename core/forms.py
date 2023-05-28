@@ -7,7 +7,7 @@ from django.core.exceptions import ValidationError
 
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Paciente
+from .models import Paciente, Usuario
 from django.shortcuts import redirect
 
 
@@ -37,3 +37,11 @@ class LoginForm(forms.ModelForm):
             password = self.cleaned_data['password']
             if not authenticate(email=email, password=password):
                 raise forms.ValidationError("Los datos no coinciden con ninguna cuenta.")
+            
+
+
+class PacienteForm(forms.ModelForm):
+
+    class Meta:
+        model = Paciente
+        fields = ['id_paciente','nombre','rut','fecha_nacimiento','nro_telefono','email']

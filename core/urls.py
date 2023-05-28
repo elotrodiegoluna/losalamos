@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import home, acceder, LogOut, registro, consultas
+from .views import home, acceder, LogOut, registro, consultas, Paciente,nuevo_paciente
 from django.contrib.auth import views
 #from .forms import UserLoginForm
 from django.conf import settings
@@ -11,6 +11,8 @@ urlpatterns = [
     path('logout/',LogOut,name='logout'),
     path('',home,name="home"),
     path('registro/',registro,name="registro"),
-    path('consultas/',consultas,name="consultas")
+    path('consultas/',consultas,name="consultas"),
+    path('Paciente/',Paciente,name="Paciente"),
+    path('nuevo_paciente/',nuevo_paciente,name="nuevo_paciente"),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

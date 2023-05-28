@@ -1,0 +1,154 @@
+{% extends 'core/base.html'%}
+{% block base %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+<script>
+    function eliminar_paciente(id_paciente){
+        console.log(id_paciente)
+        Swal.fire({
+            "title":"¿ Estas seguro ?",
+            "text":"Esta accion no se puede deshacer",
+            "icon":"warning",
+            "showCancelButton":true,
+            "cancelButtonText":"Cancelar",
+            "confirmButtonText":"Si, eliminar",
+            "reverseButtons":true,
+            "confirmButtonColor":"red"
+        })
+        .then(function(result){
+            if(result.isConfirmed){
+                window.location.href = "/eliminar_paciente/"+id_paciente+"/"
+            }
+
+          })
+        }
+
+</script>
+
+<body>
+    <div class="text-center p-1" > <h3><i class="fa-solid fa-list p-3"></i>Listado de Paciente</h3> </div>
+<hr>
+    <div class="row">
+
+        
+
+   
+        <div  class="col-3 w-100">
+            
+        <form action="{% url 'buscar_producto' %}">
+            <input type="form-control " name="busemp" type="search" placeholder="Ingrese paciente a buscar" class=" btn  my-2 my-sm-0  border w-100 m-3">
+        </div>
+        
+        <div class="col-1 w-100">
+            
+            <button class="btn btn btn-outline-info my-2 my-sm-0 w-100 m-3" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+        </form>
+        
+        <div class="col-4 w-100"> 
+            
+            <a href="{% url 'home' %}" class="btn btn btn-outline-info my-2 my-sm-0 w-100  m-3"><i class="fa-solid fa-arrow-left"></i> Volver a home</a> 
+        </div>
+
+        <div class="col-4 w-100">
+            
+            <a href="{% url 'nuevo_paciente' %}" class="btn btn btn-outline-info my-2 my-sm-0 w-100 m-3"><i class="fa-solid fa-plus"></i> Agregar Nuevo Paciente</a> 
+        </div>
+</div>
+<br>
+<div class="card">
+    <div class="row"> 
+        <div class="col-sm-3 p-2 text-center">
+            <h5>Total de Paciente: {{cantidad_total}} </h5> 
+         </div>
+    </div>
+
+    <div class="card-body">
+        
+        <table class=" table table-hover table-responsive-sm border" id="tabla_productos">
+            <thead class="table-info">
+            <tr>
+                <!----<th>Imagen producto</th>
+                <th>Id</th>--->
+                <th>Nombre Paciente</th>
+                <th>Estado</th>
+                <th>Opciones</th>
+            </tr>
+        </thead>
+            {% for p in paciente %}
+                   
+              <tbody>
+            <tr>
+                <td>{{p.nombre}}</td> <!--Filtro de humanize-->
+               <td>
+                
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                    {{t.completada}}
+                    </label>
+                </div> 
+                <td>
+                <a href="{% url 'nuevo_paciente'   %}"  class="btn btn-info btn-sm"><i class="fa-solid fa-pen-to-square"></i> Editar</a>
+                &nbsp
+                <a href="#" onclick="eliminar_paciente({{p.id_paciente}})" class="btn btn-danger btn-sm "><i class="fa-solid fa-trash-can"></i>  Eliminar</a> 
+            </td> 
+            </td>
+
+            </tr>
+                    
+            {% endfor %}
+        </tbody>
+        </table>
+
+
+        {% if paginator.num_pages > 1%}
+        <div class="d-flex justify-content-center paginacion" >
+            <ul class="pagination paginacion">
+                {% if entity.has_previous %}
+                    <li class="page-item d-none d-sm-block"><a class="page-link" href="?page={{ clientes.previous_page_number }}#pagtable">Anterior</a></li>
+                {% endif %}
+                {% for page in paginator.page_range %}
+                    {% if forloop.last and page != clientes.number and paginator.num_pages > 7 %} 
+                        {% if entity.next_page_number != paginator.num_pages%}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ clientes.number | add:1}}#pagtable">...</a>
+                        </li>
+                        {% endif %}
+                    <li class="page-item">
+                            <a class="page-link" href="?page={{paginator.num_pages}}#pagtable">{{paginator.num_pages}}</a>
+                    </li>
+                    {% endif %}
+                    {% if page == clientes.number and page > 7 %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page | add:-1 }}#pagtable">...</a>
+                    </li>    
+                    {% endif %}
+                    {% if page < 7 or page == clientes.number %}
+                    <li class="page-item {% if page == clientes.number %}active{% endif %}">
+                        <a class="page-link" href="?page={{ page }}#pagtable">{{ page }}</a>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+                {% if clientes.has_next %}
+                    <li class="page-item d-none d-sm-block">
+                        <a class="page-link" href="?page={{ clientes.next_page_number }}#pagtable">Siguiente</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="d-flex justify-content-center d-sm-none paginacion">            
+            {% if clientes.has_previous %}
+                <span class="page-item"><a  class="page-link" href="?page={{ clientes.previous_page_number }}#pagtable">Anterior</a></span>
+            {% endif %}
+            {% if clientes.has_next %}
+                <span class="page-item"><a class="page-link" href="?page={{ clientes.next_page_number }}#pagtable">Siguiente</a></span>
+            {% endif %}
+            <br>
+            <br>
+        </div>
+        {% endif %}
+
+</body>
+{% endblock %}

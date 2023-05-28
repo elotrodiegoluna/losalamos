@@ -135,3 +135,14 @@ class Event(models.Model):
 
     def __str__(self):
         return self.title
+    
+class Paciente(models.Model):
+    id_paciente = models.IntegerField(primary_key=True)
+    nombre = models.CharField(max_length=45, default='nombre')
+    rut = models.CharField(max_length=45, default='123')
+    fecha_nacimiento = models.DateField(null=True)
+    nro_telefono = models.IntegerField(default=123132)
+    email = models.EmailField(_("email address"), unique=True)
+
+    def __str__(self):
+        return self.nombre

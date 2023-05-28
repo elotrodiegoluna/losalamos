@@ -3,8 +3,10 @@ from django.contrib import messages #envia mensajes
 from django.shortcuts import render
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
-from .forms import LoginForm, RegistrationForm # formulario personalizado (validacion de errores)
+from .forms import LoginForm, RegistrationForm, PacienteForm # formulario personalizado (validacion de errores)
 from crispy_forms.helper import FormHelper
+from django.core.paginator import Paginator # importar paginacion 
+from django.http import Http404  # importa pagna de error
 
 # para usar el calendario
 import calendar
@@ -14,7 +16,7 @@ from core.models import Event
 from django import forms
 #from bootstrap_datepicker_plus import DatePickerInput, TimePickerInput
 
-from .models import Event
+from .models import Event,Paciente
 
 import logging
 logger = logging.getLogger('django')
@@ -111,3 +113,37 @@ def consultas(request):
     listaMedicos['horamedica']= ReservaHora.objects.all()
     listaMedicos['horasLibres']= tomarHoras()
     return render(request,'consultas.html',listaMedicos)
+ 
+def Paciente(request):
+    pacientes = Paciente.objects.all()
+    cantidad_total = Paciente.objects.count()
+    page = request.GET.get('page',1)
+
+    try:
+        paginator = Paginator(pacientes, 2)
+        pacientes = paginator.page(page)
+
+    except:
+        raise Http404 #pagina de error
+
+    data = {
+        'pacientes': pacientes,
+        'cantidad_total':cantidad_total,
+        'paginator': paginator,
+    }
+    return render(request,'core/Paciente.html',data)
+def nuevo_paciente(request):
+    data = {
+        'formulario_agregar': PacienteForm
+    }
+
+    if request.method == 'POST':
+        formulario = PacienteForm(data=request.POST, files=request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "Guardado correctamente")
+            data["mensaje"] = "Guardado con exito"
+            return redirect(to="productos")
+        else: 
+            data["formulario_agregar"] = formulario
+    return  render(request,'core/nuevo-paciente.html',data)
