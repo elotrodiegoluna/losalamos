@@ -114,7 +114,7 @@ def consultas(request):
     listaMedicos['horasLibres']= tomarHoras()
     return render(request,'consultas.html',listaMedicos)
  
-def Paciente(request):
+def paciente(request):
     pacientes = Paciente.objects.all()
     cantidad_total = Paciente.objects.count()
     page = request.GET.get('page',1)
